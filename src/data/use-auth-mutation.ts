@@ -2,6 +2,7 @@ import { useNavigate } from '@tanstack/react-router';
 import axios from 'axios';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
+import axiosInstance from '@/lib/axios-instance';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -54,7 +55,7 @@ export const useAuthMutation = () => {
         localStorage.getItem('refreshToken'),
       ];
 
-      return await axios.post(`${API_URL}/auth/logout`, {
+      return await axiosInstance.post(`${API_URL}/auth/logout`, {
         accessToken,
         refreshToken,
       });
