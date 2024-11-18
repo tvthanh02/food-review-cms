@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
@@ -13,7 +15,7 @@ const blockedRequestsQueue: {
   reject: (reason: unknown) => void;
 }[] = [];
 
-axios.interceptors.request.use((config) => {
+axiosInstance.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem('accessToken');
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
@@ -21,7 +23,7 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-axios.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (reponse) => reponse,
   async (error) => {
     const requestOriginal = error.config;
@@ -43,17 +45,16 @@ axios.interceptors.response.use(
       isFreshing = true;
 
       try {
-        const {
-          data: { accessToken, refreshToken },
-        } = await axios.post<{ accessToken: string; refreshToken: string }>(
-          '/auth/refresh-token',
+        const { data } = await axios.post<{ data: { accessToken: string } }>(
+          `${API_URL}/auth/refresh-token`,
           {
             refreshToken: localStorage.getItem('refreshToken'),
           }
         );
 
+        const accessToken = data.data.accessToken;
+
         localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
         requestOriginal.headers.Authorization = `Bearer ${accessToken}`;
         axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 

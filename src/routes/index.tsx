@@ -1,18 +1,9 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
-  component: Index,
+  loader: () => {
+    throw redirect({
+      to: '/dashboard',
+    });
+  },
 });
-
-function Index() {
-  const navigate = useNavigate({
-    from: '/',
-  });
-
-  navigate({
-    to: '/dashboard',
-    replace: true,
-  });
-
-  return null;
-}

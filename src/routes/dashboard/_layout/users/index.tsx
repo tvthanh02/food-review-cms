@@ -1,3 +1,5 @@
+import PaginationDemo from '@/components/user/pagination';
+import TableDemo from '@/components/user/table';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/dashboard/_layout/users/')({
@@ -5,5 +7,12 @@ export const Route = createFileRoute('/dashboard/_layout/users/')({
 });
 
 function UserPage() {
-  return 'Hello /dashboard/_layout/users/!';
+  return (
+    <>
+      <TableDemo />
+      <div className='my-6'>
+        <PaginationDemo />
+      </div>
+    </>
+  );
 }

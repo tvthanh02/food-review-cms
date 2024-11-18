@@ -1,3 +1,5 @@
+import { Toaster } from '@/components/ui/toaster';
+
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 
 export const Route = createRootRoute({
@@ -5,5 +7,10 @@ export const Route = createRootRoute({
 });
 
 function Root() {
-  return <Outlet />;
+  return (
+    <>
+      <Toaster />
+      <Outlet />
+    </>
+  );
 }

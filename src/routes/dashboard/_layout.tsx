@@ -1,81 +1,30 @@
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/components/ui/sidebar';
-import { createFileRoute, Outlet } from '@tanstack/react-router';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
-import { Toaster } from '@/components/ui/toaster';
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import SidebarCustom from '@/components/layout/sidebar';
+import Header from '@/components/layout/header';
+import BreadcrumbCustom from '@/components/layout/breadcrumb';
 
 export const Route = createFileRoute('/dashboard/_layout')({
+  beforeLoad: () => {
+    if (!localStorage.getItem('accessToken')) {
+      throw redirect({
+        to: '/login',
+      });
+    }
+  },
   component: DashBoardLayout,
 });
-
-const items = [
-  {
-    title: 'Home',
-    url: '#',
-    icon: Home,
-  },
-  {
-    title: 'Inbox',
-    url: '#',
-    icon: Inbox,
-  },
-  {
-    title: 'Calendar',
-    url: '#',
-    icon: Calendar,
-  },
-  {
-    title: 'Search',
-    url: '#',
-    icon: Search,
-  },
-  {
-    title: 'Settings',
-    url: '#',
-    icon: Settings,
-  },
-];
 
 function DashBoardLayout() {
   return (
     <SidebarProvider>
-      <Sidebar>
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Application</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <a href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </SidebarContent>
-      </Sidebar>
-      <main>
-        <header className='w-full h-20 p-2'>
-          <SidebarTrigger />
-        </header>
-        <Toaster />
-        <Outlet />
-        <footer className='w-full h-20 p-2'>Footer</footer>
+      <SidebarCustom />
+      <main className='w-full flex flex-col'>
+        <Header />
+        <div className='flex-1 px-4'>
+          <BreadcrumbCustom />
+          <Outlet />
+        </div>
       </main>
     </SidebarProvider>
   );
