@@ -23,7 +23,7 @@ import { ChevronDown } from 'lucide-react';
 import { groups, items } from '@/constants/menu';
 import clsx from 'clsx';
 import useDialog from '@/hooks/use-dialog';
-import { useAuthMutation } from '@/data/use-auth-mutation';
+import { useAuthMutation } from '@/data/auth/use-auth-mutation';
 
 const SidebarCustom = () => {
   const { pathname } = useLocation();

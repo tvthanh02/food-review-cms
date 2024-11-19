@@ -6,4 +6,5 @@ interface User {
   social_links: string[];
   role: string;
   bio: string;
+  createdAt: string;
 }

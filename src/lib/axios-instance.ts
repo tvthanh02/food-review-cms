@@ -27,7 +27,7 @@ axiosInstance.interceptors.response.use(
   (reponse) => reponse,
   async (error) => {
     const requestOriginal = error.config;
-    if (error?.response.status === 401) {
+    if (error?.response?.status === 401) {
       if (isFreshing) {
         try {
           const accessToken = await new Promise<string>((resolve, reject) => {

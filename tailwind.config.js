@@ -5,7 +5,11 @@ const BASE_FONT_SIZE = 10;
 
 export default {
   darkMode: ['class'],
-  content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{ts,tsx,js,jsx}',
+    './node_modules/@medusajs/ui/dist/**/*.{js,jsx,ts,tsx}',
+  ],
   theme: {
     screens: {
       sm: '640px',
@@ -156,4 +160,5 @@ export default {
     },
   },
   plugins: [require('tailwindcss-animate')],
+  presets: [require('@medusajs/ui-preset')],
 };

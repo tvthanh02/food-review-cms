@@ -18,7 +18,7 @@ const BreadcrumbCustom = () => {
     if (item) {
       breadcrumbItems.push({
         name: item,
-        href: `/${item}`,
+        href: `/dashboard/${item}`,
         current: index === pathname.split('/').length - 1,
         icon: index === 1 ? <House size={16} /> : undefined,
       });

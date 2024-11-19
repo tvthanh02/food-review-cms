@@ -1,4 +1,4 @@
-import useAuth from '@/data/use-auth';
+import useAuth from '@/data/auth/use-auth';
 import { Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useLocation } from '@tanstack/react-router';
@@ -26,7 +26,9 @@ const Header = () => {
             </p>
           </div>
           <Avatar>
-            <AvatarImage src='https://github.com/shadcn.png' />
+            <AvatarImage
+              src={profile?.avatar ?? 'https://github.com/shadcn.png'}
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </div>

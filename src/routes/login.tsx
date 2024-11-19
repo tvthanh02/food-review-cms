@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { LockIcon, MailIcon, EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useState } from 'react';
-import { useAuthMutation } from '@/data/use-auth-mutation';
+import { useAuthMutation } from '@/data/auth/use-auth-mutation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 export const Route = createFileRoute('/login')({
