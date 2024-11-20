@@ -1,10 +1,10 @@
 import SubAdminActions from '@/components/sub-admin/sub-admin-actions';
 import { createFileRoute } from '@tanstack/react-router';
-import useSubAdmin from '@/data/sub-admin/use-sub-admin';
+import useSubAdmin from '@/data/sub-admin/useSubAmin';
 import { subAdminColumns } from '@/components/sub-admin/columns';
-import TableDemo from '@/components/layout/table';
+import TableDemo from '@/components/common/table';
 import { Table } from '@medusajs/ui';
-import useSubAdminLogic from '@/hooks/use-sub-admin-logic';
+import { useMemo } from 'react';
 export const Route = createFileRoute('/dashboard/_layout/(human)/sub-admins/')({
   validateSearch: (search: SearchParamsSubadmin) => {
     return {
@@ -20,7 +20,22 @@ function SubAdminPage() {
 
   const { data, isLoading, error } = useSubAdmin(searchParams);
 
-  const { pagination } = useSubAdminLogic(data?.meta);
+  const canPreviousPage = useMemo(() => {
+    if (!data?.meta?.currentPage || !data?.meta?.totalPages) return false;
+    return (
+      1 < data?.meta?.currentPage &&
+      data?.meta?.currentPage <= data?.meta?.totalPages
+    );
+  }, [data]);
+
+  const canNextPage = useMemo(() => {
+    if (!data?.meta?.currentPage || !data?.meta.totalPages) return false;
+    return data?.meta.currentPage < data?.meta.totalPages;
+  }, [data]);
+
+  const handlePreviosPage = () => {};
+
+  const handleNextPage = () => {};
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>lỗi: {error.message}</div>;
@@ -32,14 +47,14 @@ function SubAdminPage() {
         <TableDemo<User> columns={subAdminColumns} data={data?.data ?? []} />
         <Table.Pagination
           className='text-[1.3rem] [&_button]:text-[1.2rem] space-y-3'
-          count={pagination?.count ?? 0}
-          pageSize={pagination?.pageSize ?? 0}
-          pageIndex={pagination?.pageIndex ?? 0}
-          pageCount={pagination?.pageCount ?? 0}
-          canPreviousPage={pagination?.canPreviousPage ?? false}
-          canNextPage={pagination?.canNextPage ?? false}
-          previousPage={pagination?.previousPage}
-          nextPage={pagination?.nextPage}
+          count={data?.meta.total ?? 0}
+          pageSize={Number(searchParams.limit ?? 0)}
+          pageIndex={data?.meta.currentPage ? data.meta.currentPage - 1 : 0}
+          pageCount={data?.meta.totalPages ?? 0}
+          canNextPage={canNextPage}
+          canPreviousPage={canPreviousPage}
+          previousPage={handlePreviosPage}
+          nextPage={handleNextPage}
         />
       </div>
     </div>

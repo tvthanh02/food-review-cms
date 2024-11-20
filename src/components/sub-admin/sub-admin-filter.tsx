@@ -12,7 +12,7 @@ import {
 } from '../ui/dropdown-menu';
 import { useState } from 'react';
 import { Input } from '../ui/input';
-import useFilter from '@/hooks/use-filter';
+import useFilter from '@/hooks/useFilter';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 import { Controller } from 'react-hook-form';
 

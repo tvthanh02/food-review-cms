@@ -2,7 +2,7 @@ import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import SidebarCustom from '@/components/layout/sidebar';
 import Header from '@/components/layout/header';
-import BreadcrumbCustom from '@/components/layout/breadcrumb';
+import BreadcrumbCustom from '@/components/common/breadcrumb';
 
 export const Route = createFileRoute('/dashboard/_layout')({
   beforeLoad: () => {

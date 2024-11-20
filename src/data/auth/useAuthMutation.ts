@@ -1,6 +1,6 @@
 import { useNavigate } from '@tanstack/react-router';
 import axios from 'axios';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { useMutation } from '@tanstack/react-query';
 import axiosInstance from '@/lib/axios-instance';
 

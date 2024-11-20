@@ -1,4 +1,4 @@
-import useAuth from '@/data/auth/use-auth';
+import useAuth from '@/data/auth/useAuth';
 import { Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useLocation } from '@tanstack/react-router';
