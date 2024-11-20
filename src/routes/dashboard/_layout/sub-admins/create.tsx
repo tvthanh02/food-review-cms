@@ -60,7 +60,7 @@ function SubAdminCreatePage() {
   return (
     <div className='w-full h-auto '>
       <form className='flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)}>
-        <div className='w-full h-fit px-3 py-4 border rounded-2xl'>
+        <div className='cus-container'>
           <div className='w-full h-fit flex flex-col gap-3'>
             <div className='flex flex-col gap-1'>
               <h1 className='text-2xl font-bold'>Create Sub Admin</h1>
@@ -110,7 +110,7 @@ function SubAdminCreatePage() {
             </div>
           </div>
         </div>
-        <div className='w-full h-fit px-3 py-4 border rounded-2xl'>
+        <div className='cus-container'>
           <div className='w-full h-fit grid grid-cols-2 gap-5'>
             <div className='flex flex-col gap-2'>
               <label className='font-bold' htmlFor='email'>

@@ -12,7 +12,7 @@ import { Badge } from '../ui/badge';
 export const subAdminColumns: TableColumn<User>[] = [
   {
     header: '',
-    renderCell() {
+    renderCell(item) {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -25,7 +25,12 @@ export const subAdminColumns: TableColumn<User>[] = [
               className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
               asChild
             >
-              <Link to='/dashboard/users'>View Detail</Link>
+              <Link
+                to='/dashboard/sub-admins/$subAdminId'
+                params={{ subAdminId: item._id }}
+              >
+                View Detail
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem

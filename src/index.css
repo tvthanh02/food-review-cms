@@ -150,3 +150,9 @@
     font-style: normal;
   }
 }
+
+@layer utilities {
+  .cus-container {
+    @apply w-full h-fit px-3 py-4 border rounded-2xl;
+  }
+}

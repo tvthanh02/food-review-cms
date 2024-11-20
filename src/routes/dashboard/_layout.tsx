@@ -19,9 +19,9 @@ function DashBoardLayout() {
   return (
     <SidebarProvider>
       <SidebarCustom />
-      <main className='w-full flex flex-col'>
+      <main className='w-full flex flex-col h-screen'>
         <Header />
-        <div className='flex-1 px-4'>
+        <div className='flex-1 px-4 overflow-y-auto mb-5'>
           <BreadcrumbCustom />
           <Outlet />
         </div>

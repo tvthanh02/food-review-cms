@@ -28,7 +28,7 @@ function SubAdminPage() {
   return (
     <div className='w-full h-auto flex flex-col gap-7'>
       <SubAdminActions />
-      <div className='w-full h-fit px-3 py-4 border rounded-2xl'>
+      <div className='cus-container'>
         <TableDemo<User> columns={subAdminColumns} data={data?.data ?? []} />
         <Table.Pagination
           className='text-[1.3rem] [&_button]:text-[1.2rem] space-y-3'
