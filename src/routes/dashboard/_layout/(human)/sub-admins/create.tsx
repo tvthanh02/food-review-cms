@@ -8,7 +8,9 @@ import { useMemo, useRef } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-export const Route = createFileRoute('/dashboard/_layout/sub-admins/create')({
+export const Route = createFileRoute(
+  '/dashboard/_layout/(human)/sub-admins/create'
+)({
   component: SubAdminCreatePage,
 });
 

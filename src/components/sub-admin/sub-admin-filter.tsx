@@ -24,7 +24,7 @@ const SubAdminFilter = () => {
   });
 
   const searchParams: SearchParamsSubadmin = useSearch({
-    from: '/dashboard/_layout/sub-admins/',
+    from: '/dashboard/_layout/(human)/sub-admins/',
   });
 
   const navigateFn = (values: SearchParamsSubadmin) => {

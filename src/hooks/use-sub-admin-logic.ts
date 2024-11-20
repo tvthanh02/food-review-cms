@@ -12,7 +12,7 @@ interface Pagination {
 }
 
 const useSubAdminLogic = (meta: Meta | undefined) => {
-  const Route = getRouteApi('/dashboard/_layout/sub-admins/');
+  const Route = getRouteApi('/dashboard/_layout/(human)/sub-admins/');
 
   const navigate = Route.useNavigate();
 
@@ -41,7 +41,7 @@ const useSubAdminLogic = (meta: Meta | undefined) => {
     pagination.canNextPage = currentPage < totalPages;
     pagination.previousPage = async () => {
       await navigate({
-        search: (preSearch) => ({
+        search: (preSearch: SearchParamsSubadmin) => ({
           ...preSearch,
           page: currentPage - 1 + '',
         }),
@@ -49,7 +49,7 @@ const useSubAdminLogic = (meta: Meta | undefined) => {
     };
     pagination.nextPage = async () => {
       await navigate({
-        search: (preSearch) => ({
+        search: (preSearch: SearchParamsSubadmin) => ({
           ...preSearch,
           page: currentPage + 1 + '',
         }),

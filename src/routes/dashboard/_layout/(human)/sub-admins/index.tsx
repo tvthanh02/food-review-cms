@@ -5,7 +5,7 @@ import { subAdminColumns } from '@/components/sub-admin/columns';
 import TableDemo from '@/components/layout/table';
 import { Table } from '@medusajs/ui';
 import useSubAdminLogic from '@/hooks/use-sub-admin-logic';
-export const Route = createFileRoute('/dashboard/_layout/sub-admins/')({
+export const Route = createFileRoute('/dashboard/_layout/(human)/sub-admins/')({
   validateSearch: (search: SearchParamsSubadmin) => {
     return {
       page: search.page ?? 1,

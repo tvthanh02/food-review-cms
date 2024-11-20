@@ -27,7 +27,7 @@ export const items = [
     group: 'Analytics',
   },
   {
-    title: 'Sub Admin',
+    title: 'Sub Admins',
     url: '/dashboard/sub-admins',
     icon: User,
     group: 'Human',
@@ -51,19 +51,19 @@ export const items = [
     group: 'Post',
   },
   {
-    title: 'Category',
+    title: 'Categories',
     url: '/dashboard/categories',
     icon: ChartBarStacked,
     group: 'Post',
   },
   {
-    title: 'Report Type',
+    title: 'Report Types',
     url: '/dashboard/report-types',
     icon: ChartBarStacked,
-    group: 'Post',
+    group: 'Reporting',
   },
   {
-    title: 'Notification',
+    title: 'Notifications',
     url: '/dashboard/notifications',
     icon: Bell,
     group: 'Announce',

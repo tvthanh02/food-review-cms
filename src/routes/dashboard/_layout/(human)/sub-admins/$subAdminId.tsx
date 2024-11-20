@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
-  '/dashboard/_layout/sub-admins/$subAdminId'
+  '/dashboard/_layout/(human)/sub-admins/$subAdminId'
 )({
   component: SubAdminDetailPage,
 });
