@@ -2,12 +2,16 @@ interface ReportType {
   _id: string;
   name: string;
   status: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface ReportTypeWithAction {
   _id: string;
   name: string;
   status: string;
+  created_at: string;
+  updated_at: string;
   deleteFn: (id: string) => void;
 }
 

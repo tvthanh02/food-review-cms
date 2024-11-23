@@ -6,7 +6,9 @@ interface User {
   social_links: string[];
   role: string;
   bio: string;
-  createdAt: string;
+  isLock: boolean;
+  created_at: string;
+  subadmin_status: 'Pending' | 'Active' | 'Rejected' | 'Suspended';
 }
 
 interface SearchParamsUser {

@@ -15,6 +15,7 @@ interface Report {
   }[];
   status: 'Pending' | 'Resolved' | 'Closed';
   created_at: string;
+  updated_at: string;
 }
 
 interface ReportWithAction {
@@ -34,6 +35,8 @@ interface ReportWithAction {
   }[];
   status: 'Pending' | 'Resolved' | 'Closed';
   created_at: string;
+  updated_at: string;
+
   approveFn: (id: string) => void;
   closeFn: (id: string) => void;
 }
