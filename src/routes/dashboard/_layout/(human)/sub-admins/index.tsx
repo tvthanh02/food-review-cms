@@ -5,6 +5,7 @@ import { subAdminColumns } from '@/components/sub-admin/columns';
 import TableDemo from '@/components/common/table';
 import { Table } from '@medusajs/ui';
 import { useMemo } from 'react';
+import Loader from '@/components/ui/loader';
 export const Route = createFileRoute('/dashboard/_layout/(human)/sub-admins/')({
   validateSearch: (search: SearchParamsSubadmin) => {
     return {
@@ -37,7 +38,7 @@ function SubAdminPage() {
 
   const handleNextPage = () => {};
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>lỗi: {error.message}</div>;
 
   return (

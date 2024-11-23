@@ -29,7 +29,7 @@ const updateReportType = async ({ _id, name, status }: ReportType) => {
   });
 
   try {
-    await axiosInstance.patch(`${API_URL}/report-type/update/${_id}`, {
+    await axiosInstance.patch(`${API_URL}/report-type/${_id}/update`, {
       ...dataUpdate,
     });
   } catch (error) {
@@ -40,7 +40,7 @@ const updateReportType = async ({ _id, name, status }: ReportType) => {
 
 const deleteReportType = async (reportTypeId: string) => {
   try {
-    await axiosInstance.delete(`${API_URL}/report-type/delete/${reportTypeId}`);
+    await axiosInstance.delete(`${API_URL}/report-type/${reportTypeId}/delete`);
   } catch (error) {
     console.log(error);
     throw error;
@@ -65,8 +65,8 @@ const useReportTypeMutation = () => {
       await navigate({
         to: '/dashboard/report-types',
         search: {
-          page: '1',
-          limit: '20',
+          page: 1,
+          limit: 20,
         },
       });
       toast({

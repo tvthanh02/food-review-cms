@@ -12,8 +12,8 @@ interface ReportTypeWithAction {
 }
 
 interface SearchParamsReportType {
-  page: string;
-  limit: string;
+  page: number;
+  limit: number;
   status?: 'active' | 'inactive';
 }
 

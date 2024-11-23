@@ -21,9 +21,13 @@ function DashBoardLayout() {
       <SidebarCustom />
       <main className='w-full flex flex-col h-screen'>
         <Header />
-        <div className='flex-1 px-4 overflow-y-auto mb-5'>
-          <BreadcrumbCustom />
-          <Outlet />
+        <div className='flex-1 flex flex-col px-4 overflow-y-auto mb-5'>
+          <div className='grow-0 shrink-0'>
+            <BreadcrumbCustom />
+          </div>
+          <div className='flex-1'>
+            <Outlet />
+          </div>
         </div>
       </main>
     </SidebarProvider>

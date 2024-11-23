@@ -8,3 +8,10 @@ interface User {
   bio: string;
   createdAt: string;
 }
+
+interface SearchParamsUser {
+  page: number;
+  limit: number;
+  name?: string;
+  email?: string;
+}

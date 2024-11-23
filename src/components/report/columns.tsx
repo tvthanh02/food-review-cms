@@ -27,7 +27,7 @@ import { Badge } from '../ui/badge';
 
  */
 
-export const reportColumns: TableColumn<Report>[] = [
+export const reportColumns: TableColumn<ReportWithAction>[] = [
   {
     header: '',
     renderCell(item) {
@@ -44,27 +44,41 @@ export const reportColumns: TableColumn<Report>[] = [
               asChild
             >
               <Link
-                to='/dashboard/sub-admins/$subAdminId'
-                params={{ subAdminId: item._id }}
+                to='/dashboard/posts/$postId'
+                params={{ postId: item.post_id._id }}
               >
-                View Detail
+                Go to post
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
-              asChild
-            >
-              <Link to='/dashboard/users'>Suspense</Link>
-            </DropdownMenuItem>
+
+            {item.status === 'Closed' && (
+              <div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
+                  asChild
+                  onClick={() => item.approveFn(item._id)}
+                >
+                  <p>Resolved</p>
+                </DropdownMenuItem>
+              </div>
+            )}
+            {item.status === 'Resolved' && (
+              <div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
+                  asChild
+                  onClick={() => item.closeFn(item._id)}
+                >
+                  <p>Close</p>
+                </DropdownMenuItem>
+              </div>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       );
     },
-  },
-  {
-    header: 'ID',
-    renderCell: (item) => <p>{item._id}</p>,
   },
   {
     header: 'User Report',
@@ -73,26 +87,30 @@ export const reportColumns: TableColumn<Report>[] = [
         <div className='w-[3.8rem] h-[3.8rem] overflow-hidden rounded-full border border-secondary'>
           <img
             className='w-full h-full object-cover'
-            src={item.user.avatar}
+            src={item.user_id?.avatar ?? 'https://github.com/shadcn.png'}
             alt='ADMIN_AVATAR'
           />
         </div>
-        <p className='text-sm'>{item.user.user_name}</p>
+        <p className='text-sm'>{item.user_id.user_name}</p>
       </div>
     ),
-  },
-  {
-    header: 'Post ID',
-    renderCell: (item) => <p>{item.post._id}</p>,
   },
   {
     header: 'Report Content',
     renderCell: (item) => (
       <ul>
-        {item.report_content.map((content, index) => (
-          <li key={index}>{content}</li>
+        {item.report_type_id.map((content, index) => (
+          <li className='py-1' key={index}>
+            <Badge variant='outline'>{content.name}</Badge>
+          </li>
         ))}
       </ul>
+    ),
+  },
+  {
+    header: 'Note',
+    renderCell: (item) => (
+      <p className='max-w-[15rem]'>{item?.note ?? 'No note'}</p>
     ),
   },
   {
@@ -101,6 +119,6 @@ export const reportColumns: TableColumn<Report>[] = [
   },
   {
     header: 'Status',
-    renderCell: () => <Badge>Pending</Badge>,
+    renderCell: (item) => <Badge>{item.status}</Badge>,
   },
 ];

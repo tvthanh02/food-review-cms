@@ -6,7 +6,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 const fetchSubAdmin = async (searchQuery: SearchParamsSubadmin) => {
   try {
     const { data } = await axiosInstance.get<{
-      data: { data: User[] | null; meta: Meta };
+      data: User[];
+      meta: Meta;
     }>(`${API_URL}/user`, {
       params: {
         page: searchQuery.page,
@@ -18,8 +19,8 @@ const fetchSubAdmin = async (searchQuery: SearchParamsSubadmin) => {
     });
 
     return {
-      data: data.data?.data ?? [],
-      meta: data.data.meta,
+      data: data.data,
+      meta: data.meta,
     };
   } catch (error) {
     console.log(error);

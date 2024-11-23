@@ -9,13 +9,7 @@ const router = createRouter({
   routeTree,
 });
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 3,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 declare module '@tanstack/react-router' {
   interface Register {

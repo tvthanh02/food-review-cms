@@ -6,7 +6,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const fetchReportTypeDetail = async (id: string) => {
   try {
-    const { data } = await axiosInstance.get(`${API_URL}/report-type/${id}`);
+    const { data } = await axiosInstance.get<{ data: ReportType }>(
+      `${API_URL}/report-type/${id}`
+    );
     return data.data;
   } catch (error) {
     console.log(error);

@@ -1,6 +1,8 @@
 import TableDemo from '@/components/common/table';
 import { reportColumns } from '@/components/report/columns';
 import ReportActions from '@/components/report/report-actions';
+import Loader from '@/components/ui/loader';
+import useReportMutation from '@/data/report/useReportMutation';
 import useReports from '@/data/report/useReports';
 import { Table } from '@medusajs/ui';
 import { createFileRoute } from '@tanstack/react-router';
@@ -21,6 +23,8 @@ function ReportPage() {
 
   const { data, isLoading, error } = useReports(searchParams);
 
+  const { updateStatusMutation } = useReportMutation();
+
   const canPreviousPage = useMemo(() => {
     if (!data?.meta?.currentPage || !data?.meta?.totalPages) return false;
     return (
@@ -34,18 +38,35 @@ function ReportPage() {
     return data?.meta.currentPage < data?.meta.totalPages;
   }, [data]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>lỗi: {error.message}</div>;
 
   const handlePreviosPage = () => {};
 
   const handleNextPage = () => {};
 
+  const handleApprove = (id: string) => {
+    updateStatusMutation.mutate({ id, status: 'Resolved' });
+  };
+
+  const handleClose = (id: string) => {
+    updateStatusMutation.mutate({ id, status: 'Closed' });
+  };
+
+  const dataReportsWithAction = data?.data.map((report) => ({
+    ...report,
+    approveFn: handleApprove,
+    closeFn: handleClose,
+  }));
+
   return (
     <div className='w-full h-auto flex flex-col gap-7'>
       <ReportActions />
       <div className='cus-container'>
-        <TableDemo<Report> columns={reportColumns} data={data?.data ?? []} />
+        <TableDemo<ReportWithAction>
+          columns={reportColumns}
+          data={dataReportsWithAction ?? []}
+        />
         <Table.Pagination
           className='text-[1.3rem] [&_button]:text-[1.2rem] space-y-3'
           count={data?.meta.total ?? 0}

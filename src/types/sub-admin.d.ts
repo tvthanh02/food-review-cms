@@ -1,6 +1,6 @@
 interface SearchParamsSubadmin {
-  page: string;
-  limit: string;
+  page: number;
+  limit: number;
   name?: string;
   email?: string;
 }

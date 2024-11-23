@@ -6,7 +6,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 const fetchReportTypes = async (searchQuery: SearchParamsReportType) => {
   try {
     const { data } = await axiosInstance.get<{
-      data: { data: ReportType[] | null; meta: Meta };
+      data: ReportType[];
+      meta: Meta;
     }>(`${API_URL}/report-type`, {
       params: {
         ...searchQuery,
@@ -14,8 +15,8 @@ const fetchReportTypes = async (searchQuery: SearchParamsReportType) => {
     });
 
     return {
-      data: data.data?.data ?? [],
-      meta: data.data.meta,
+      data: data.data,
+      meta: data.meta,
     };
   } catch (error) {
     console.log(error);

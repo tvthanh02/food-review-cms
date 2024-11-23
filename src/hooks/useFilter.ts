@@ -11,7 +11,7 @@ const useFilter = <T extends object, K extends FieldValues>(
   searchParams: T,
   navigateFn: (values: K) => void
 ) => {
-  const { register, control, handleSubmit, setValue } = useForm<K>();
+  const { register, control, handleSubmit, setValue, watch } = useForm<K>();
 
   useEffect(() => {
     Object.keys(searchParams).forEach((key) => {
@@ -31,6 +31,7 @@ const useFilter = <T extends object, K extends FieldValues>(
   return {
     register,
     control,
+    watch,
     handleSubmit: handleSubmit(onSubmit),
   };
 };

@@ -7,6 +7,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
 import useDialog from '@/hooks/useDialog';
 import useReportTypeMutation from '@/data/report-type/useReportTypeMutation';
+import Loader from '@/components/ui/loader';
 
 export const Route = createFileRoute(
   '/dashboard/_layout/(report)/report-types/'
@@ -42,7 +43,7 @@ function ReportTypePage() {
     return data?.meta.currentPage < data?.meta.totalPages;
   }, [data]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>lỗi: {error.message}</div>;
 
   const handlePreviosPage = () => {};
