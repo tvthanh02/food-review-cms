@@ -6,6 +6,7 @@ import TableDemo from '@/components/common/table';
 import { Table } from '@medusajs/ui';
 import { useMemo } from 'react';
 import Loader from '@/components/ui/loader';
+import BreadcrumbCustom from '@/components/common/breadcrumb';
 export const Route = createFileRoute('/dashboard/_layout/(human)/sub-admins/')({
   validateSearch: (search: SearchParamsSubadmin) => {
     return {
@@ -42,7 +43,8 @@ function SubAdminPage() {
   if (error) return <div>lỗi: {error.message}</div>;
 
   return (
-    <div className='w-full h-auto flex flex-col gap-7'>
+    <div className='w-full h-auto flex flex-col gap-5'>
+      <BreadcrumbCustom title='Sub Admins' path='/dashboard/sub-admins' />
       <SubAdminActions />
       <div className='cus-container'>
         <TableDemo<User> columns={subAdminColumns} data={data?.data ?? []} />

@@ -53,7 +53,7 @@ const ReportFilter = () => {
   return (
     <DropdownMenu open={isOpen}>
       <DropdownMenuTrigger onClick={() => setOpen(!isOpen)} asChild>
-        <Button variant='outline'>
+        <Button variant='default'>
           <Filter size={16} />
           Filter
         </Button>

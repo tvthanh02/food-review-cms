@@ -1,3 +1,4 @@
+import BreadcrumbCustom from '@/components/common/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
@@ -40,60 +41,63 @@ function CreateReportTypePage() {
   };
 
   return (
-    <div className='cus-container'>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='w-[50rem] h-fit flex flex-col gap-5'>
-          <div className='w-full flex flex-col gap-2'>
-            <label className='font-bold' htmlFor='name'>
-              Type Name
-            </label>
-            <Controller
-              control={control}
-              name='name'
-              render={({ field }) => (
-                <Input
-                  id='name'
-                  placeholder='Violence,...'
-                  onChange={field.onChange}
-                />
+    <div className='w-full h-auto flex flex-col gap-5'>
+      <BreadcrumbCustom title='Create Report Type' path='/dashboard' />
+      <div className='cus-container'>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className='w-[50rem] h-fit flex flex-col gap-5'>
+            <div className='w-full flex flex-col gap-2'>
+              <label className='font-bold' htmlFor='name'>
+                Type Name
+              </label>
+              <Controller
+                control={control}
+                name='name'
+                render={({ field }) => (
+                  <Input
+                    id='name'
+                    placeholder='Violence,...'
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+              {errors.name && (
+                <span className='text-[1.3rem] text-red-600'>
+                  {errors.name.message}
+                </span>
               )}
-            />
-            {errors.name && (
-              <span className='text-[1.3rem] text-red-600'>
-                {errors.name.message}
-              </span>
-            )}
+            </div>
+            <div className='w-full flex flex-col gap-2'>
+              <label className='font-bold' htmlFor='status'>
+                Status
+              </label>
+              <Controller
+                control={control}
+                name='status'
+                render={({ field }) => (
+                  <Switch
+                    onCheckedChange={(value: boolean) => field.onChange(value)}
+                  />
+                )}
+              />
+            </div>
+            <div className='w-full flex justify-end items-center gap-5'>
+              <Link
+                to='/dashboard/report-types'
+                search={{
+                  page: 1,
+                  limit: 20,
+                }}
+              >
+                <Button type='button' variant='outline'>
+                  Cancel
+                </Button>
+              </Link>
+              <Button type='submit'>Save</Button>
+            </div>
           </div>
-          <div className='w-full flex flex-col gap-2'>
-            <label className='font-bold' htmlFor='status'>
-              Status
-            </label>
-            <Controller
-              control={control}
-              name='status'
-              render={({ field }) => (
-                <Switch
-                  onCheckedChange={(value: boolean) => field.onChange(value)}
-                />
-              )}
-            />
-          </div>
-          <div className='w-full flex justify-end items-center gap-5'>
-            <Link
-              to='/dashboard/report-types'
-              search={{
-                page: '1',
-                limit: '20',
-              }}
-            >
-              <Button type='button' variant='outline'>
-                Cancel
-              </Button>
-            </Link>
-            <Button type='submit'>Save</Button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

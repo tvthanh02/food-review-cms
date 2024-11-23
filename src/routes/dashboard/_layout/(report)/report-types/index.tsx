@@ -8,6 +8,7 @@ import { useMemo } from 'react';
 import useDialog from '@/hooks/useDialog';
 import useReportTypeMutation from '@/data/report-type/useReportTypeMutation';
 import Loader from '@/components/ui/loader';
+import BreadcrumbCustom from '@/components/common/breadcrumb';
 
 export const Route = createFileRoute(
   '/dashboard/_layout/(report)/report-types/'
@@ -69,8 +70,9 @@ function ReportTypePage() {
     })) ?? [];
 
   return (
-    <div className='w-full h-auto flex flex-col gap-7'>
+    <div className='w-full h-auto flex flex-col gap-5'>
       <RootDialog />
+      <BreadcrumbCustom title='Report Types' path='/dashboard/report-types' />
       <ReportTypeActions />
       <div className='cus-container'>
         <TableDemo<ReportTypeWithAction>

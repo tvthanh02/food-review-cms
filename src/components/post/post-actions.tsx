@@ -3,7 +3,7 @@ import { Button } from '../ui/button';
 import { Link } from '@tanstack/react-router';
 import { Input } from '../ui/input';
 
-const ReportTypeActions = () => {
+const PostAction = () => {
   return (
     <div className='w-full h-fit flex items-center justify-between'>
       <div className='w-[35rem]'>
@@ -14,7 +14,7 @@ const ReportTypeActions = () => {
           <Filter size={16} />
           Filter
         </Button>
-        <Link to='/dashboard/report-types/create'>
+        <Link to='/dashboard/posts/create'>
           <Button>
             <Plus size={16} />
             Create
@@ -25,4 +25,4 @@ const ReportTypeActions = () => {
   );
 };
 
-export default ReportTypeActions;
+export default PostAction;

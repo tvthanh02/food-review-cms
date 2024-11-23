@@ -9,24 +9,6 @@ import {
 import { Link } from '@tanstack/react-router';
 import { Badge } from '../ui/badge';
 
-/**
- * interface Report {
-  _id: string;
-  note: string;
-  post: {
-    _id: string;
-  };
-  user: {
-    _id: string;
-    user_name: string;
-    avatar: string;
-  };
-  report_content: string[];
-  created_at: string;
-}
-
- */
-
 export const reportColumns: TableColumn<ReportWithAction>[] = [
   {
     header: '',
@@ -81,19 +63,8 @@ export const reportColumns: TableColumn<ReportWithAction>[] = [
     },
   },
   {
-    header: 'User Report',
-    renderCell: (item) => (
-      <div className='w-auto h-fit flex items-center gap-3'>
-        <div className='w-[3.8rem] h-[3.8rem] overflow-hidden rounded-full border border-secondary'>
-          <img
-            className='w-full h-full object-cover'
-            src={item.user_id?.avatar ?? 'https://github.com/shadcn.png'}
-            alt='ADMIN_AVATAR'
-          />
-        </div>
-        <p className='text-sm'>{item.user_id.user_name}</p>
-      </div>
-    ),
+    header: '#',
+    renderCell: (_, index) => <p>{index + 1}</p>,
   },
   {
     header: 'Report Content',
@@ -108,6 +79,21 @@ export const reportColumns: TableColumn<ReportWithAction>[] = [
     ),
   },
   {
+    header: 'User',
+    renderCell: (item) => (
+      <div className='w-auto h-fit flex items-center gap-3'>
+        <div className='w-[3.8rem] h-[3.8rem] overflow-hidden rounded-full border border-secondary'>
+          <img
+            className='w-full h-full object-cover'
+            src={item.user_id?.avatar ?? 'https://github.com/shadcn.png'}
+            alt='ADMIN_AVATAR'
+          />
+        </div>
+        <p className='text-sm'>{item.user_id.user_name ?? 'Trieu Thanh'}</p>
+      </div>
+    ),
+  },
+  {
     header: 'Note',
     renderCell: (item) => (
       <p className='max-w-[15rem]'>{item?.note ?? 'No note'}</p>
@@ -118,7 +104,15 @@ export const reportColumns: TableColumn<ReportWithAction>[] = [
     renderCell: (item) => <p>{item.created_at}</p>,
   },
   {
+    header: 'Update At',
+    renderCell: (item) => <p>{item.updated_at}</p>,
+  },
+  {
     header: 'Status',
-    renderCell: (item) => <Badge>{item.status}</Badge>,
+    renderCell: (item) => (
+      <Badge variant={item.status === 'Closed' ? 'destructive' : 'default'}>
+        {item.status}
+      </Badge>
+    ),
   },
 ];

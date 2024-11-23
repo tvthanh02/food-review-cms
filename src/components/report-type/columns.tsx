@@ -47,7 +47,10 @@ export const reportTypeColumns: TableColumn<ReportTypeWithAction>[] = [
       );
     },
   },
-
+  {
+    header: '#',
+    renderCell: (_, index) => <p>{index + 1}</p>,
+  },
   {
     header: 'Type Name',
     renderCell: (item) => (
@@ -55,7 +58,23 @@ export const reportTypeColumns: TableColumn<ReportTypeWithAction>[] = [
     ),
   },
   {
+    header: 'Created At',
+    renderCell: (item) => (
+      <p>{item.created_at ?? '2024-11-22T08:22:45.427Z'}</p>
+    ),
+  },
+  {
+    header: 'Update At',
+    renderCell: (item) => (
+      <p>{item.updated_at ?? '2024-11-22T08:22:45.427Z'}</p>
+    ),
+  },
+  {
     header: 'Status',
-    renderCell: (item) => <Badge>{item.status}</Badge>,
+    renderCell: (item) => (
+      <Badge variant={item.status === 'Active' ? 'default' : 'destructive'}>
+        {item.status}
+      </Badge>
+    ),
   },
 ];

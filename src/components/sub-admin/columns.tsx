@@ -37,12 +37,28 @@ export const subAdminColumns: TableColumn<User>[] = [
               className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
               asChild
             >
-              <Link to='/dashboard/users'>Suspense</Link>
+              <Link to='/dashboard/users' search={{ page: 1, limit: 20 }}>
+                Suspense
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem
+              className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
+              asChild
+            >
+              <Link to='/dashboard/users' search={{ page: 1, limit: 20 }}>
+                Renew Invite
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
     },
+  },
+  {
+    header: '#',
+    renderCell: (_, index) => <p>{index + 1}</p>,
   },
   {
     header: 'UID',
@@ -69,13 +85,22 @@ export const subAdminColumns: TableColumn<User>[] = [
   },
   {
     header: 'Date Joined',
-    renderCell: () => <p>Nov, 02 2024</p>,
+    renderCell: (item) => <p>{item.created_at}</p>,
   },
   {
     header: 'Status',
-    renderCell: () => (
-      <Badge className='rounded-xl' variant='outline'>
-        Active
+    renderCell: (item) => (
+      <Badge
+        className='rounded-xl'
+        variant={
+          item.subadmin_status === 'Active'
+            ? 'default'
+            : item.subadmin_status === 'Rejected'
+              ? 'constructive'
+              : 'outline'
+        }
+      >
+        {item.subadmin_status}
       </Badge>
     ),
   },

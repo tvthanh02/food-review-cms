@@ -1,3 +1,4 @@
+import BreadcrumbCustom from '@/components/common/breadcrumb';
 import TableDemo from '@/components/common/table';
 import { reportColumns } from '@/components/report/columns';
 import ReportActions from '@/components/report/report-actions';
@@ -60,7 +61,8 @@ function ReportPage() {
   }));
 
   return (
-    <div className='w-full h-auto flex flex-col gap-7'>
+    <div className='w-full h-auto flex flex-col gap-5'>
+      <BreadcrumbCustom title='Reports' path='/dashboard/reports' />
       <ReportActions />
       <div className='cus-container'>
         <TableDemo<ReportWithAction>

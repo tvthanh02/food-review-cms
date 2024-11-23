@@ -3,12 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import QUERY_KEY from '@/constants/key';
 const API_URL = import.meta.env.VITE_API_URL;
 
-const fetchReportTypes = async (searchQuery: SearchParamsReportType) => {
+const fetchPosts = async (searchQuery: SearchParamsPost) => {
   try {
     const { data } = await axiosInstance.get<{
-      data: ReportType[];
+      data: Post[];
       meta: Meta;
-    }>(`${API_URL}/report-type`, {
+    }>(`${API_URL}/post`, {
       params: {
         ...searchQuery,
       },
@@ -24,11 +24,11 @@ const fetchReportTypes = async (searchQuery: SearchParamsReportType) => {
   }
 };
 
-const useReportTypes = (searchQuery: SearchParamsReportType) => {
+const usePosts = (searchQuery: SearchParamsPost) => {
   return useQuery({
-    queryKey: [QUERY_KEY.REPORT_TYPES, searchQuery],
-    queryFn: () => fetchReportTypes(searchQuery),
+    queryKey: [QUERY_KEY.POSTS, searchQuery],
+    queryFn: () => fetchPosts(searchQuery),
   });
 };
 
-export default useReportTypes;
+export default usePosts;

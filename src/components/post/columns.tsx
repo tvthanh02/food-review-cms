@@ -9,7 +9,22 @@ import {
 import { Link } from '@tanstack/react-router';
 import { Badge } from '../ui/badge';
 
-export const userColumns: TableColumn<User>[] = [
+const getColorForBadge = (status: string) => {
+  switch (status) {
+    case 'Active':
+      return 'constructive';
+    case 'Pending':
+      return 'default';
+    case 'Rejected':
+      return 'destructive';
+    case 'warn':
+      return 'outline';
+    default:
+      return 'default';
+  }
+};
+
+export const postColumns: TableColumn<PostWithAction>[] = [
   {
     header: '',
     renderCell(item) {
@@ -26,41 +41,29 @@ export const userColumns: TableColumn<User>[] = [
               asChild
             >
               <Link
-                to='/dashboard/sub-admins/$subAdminId'
-                params={{ subAdminId: item._id }}
+                to='/dashboard/posts/$postId'
+                params={{
+                  postId: item._id,
+                }}
               >
                 View Detail
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
+
             <DropdownMenuItem
               className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
               asChild
             >
-              <Link
-                to='/dashboard/users'
-                search={{
-                  page: 1,
-                  limit: 20,
-                }}
-              >
-                Ban
-              </Link>
+              <div onClick={() => item.acceptFn(item._id)}>Accept</div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
+
             <DropdownMenuItem
               className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
               asChild
             >
-              <Link
-                to='/dashboard/users'
-                search={{
-                  page: 1,
-                  limit: 20,
-                }}
-              >
-                Promote to Admin
-              </Link>
+              <div onClick={() => item.rejectFn(item._id)}>Reject</div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -72,41 +75,64 @@ export const userColumns: TableColumn<User>[] = [
     renderCell: (_, index) => <p>{index + 1}</p>,
   },
   {
-    header: 'UID',
-    renderCell: (item) => <p>{item._id}</p>,
+    header: 'Food Name',
+    renderCell: (item) => (
+      <div className='max-w-[30rem] flex items-center'>{item.food_name}</div>
+    ),
   },
   {
-    header: 'Email',
-    renderCell: (item) => <p>{item.email}</p>,
+    header: 'address',
+    renderCell: (item) => (
+      <div className='flex items-center max-w-[30rem]'>{item.position}</div>
+    ),
   },
   {
-    header: 'Information',
+    header: 'User',
     renderCell: (item) => (
       <div className='w-auto h-fit flex items-center gap-3'>
         <div className='w-[3.8rem] h-[3.8rem] overflow-hidden rounded-full border border-muted'>
           <img
             className='w-full h-full object-cover'
-            src={item.avatar ?? 'https://github.com/shadcn.png'}
+            src={item.user_id.avatar ?? 'https://github.com/shadcn.png'}
             alt='ADMIN_AVATAR'
           />
         </div>
-        <p className='text-sm'>{item.user_name}</p>
+        <p className='text-sm'>{item.user_id.user_name}</p>
       </div>
     ),
   },
   {
-    header: 'Date Joined',
-    renderCell: (item) => <p>{item.created_at}</p>,
+    header: 'Province/City',
+    renderCell: (item) => <p>{item.province}</p>,
+  },
+  {
+    header: 'Categories',
+    renderCell: (item) => (
+      <ul>
+        {item.categories.map((category, index) => (
+          <li className='py-1' key={index}>
+            <Badge variant='outline'>{category}</Badge>
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+  {
+    header: 'Created At',
+    renderCell: (item) => (
+      <p>{item.created_at ?? '2024-11-22T08:22:45.427Z'}</p>
+    ),
+  },
+  {
+    header: 'Update At',
+    renderCell: (item) => (
+      <p>{item.updated_at ?? '2024-11-22T08:22:45.427Z'}</p>
+    ),
   },
   {
     header: 'Status',
     renderCell: (item) => (
-      <Badge
-        className='rounded-xl'
-        variant={item.isLock ? 'destructive' : 'default'}
-      >
-        {item.isLock ? 'Locked' : 'Nomal'}
-      </Badge>
+      <Badge variant={getColorForBadge(item.status)}>{item.status}</Badge>
     ),
   },
 ];

@@ -1,3 +1,4 @@
+import BreadcrumbCustom from '@/components/common/breadcrumb';
 import TableDemo from '@/components/common/table';
 import Loader from '@/components/ui/loader';
 import { userColumns } from '@/components/user/columns';
@@ -43,7 +44,8 @@ function UserPage() {
   if (error) return <div>lỗi: {error.message}</div>;
 
   return (
-    <div className='w-full h-auto flex flex-col gap-7'>
+    <div className='w-full h-auto flex flex-col gap-5'>
+      <BreadcrumbCustom title='Users' path='/dashboard/users' />
       <UserActions />
       <div className='cus-container'>
         <TableDemo<User> columns={userColumns} data={data?.data ?? []} />
