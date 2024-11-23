@@ -1,21 +1,30 @@
 import useAuth from '@/data/auth/useAuth';
-import { Bell } from 'lucide-react';
+import { Bell, Menu } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { useLocation } from '@tanstack/react-router';
 import { CapitalizeFirstLetter } from '@/utils/helper';
+import { SidebarTrigger } from '../ui/sidebar';
+import useSidebar from '@/hooks/useSidebar';
 
 const Header = () => {
   const { data: profile } = useAuth();
-
-  const { pathname } = useLocation();
-
-  const title = CapitalizeFirstLetter(pathname.split('/').pop() ?? '');
+  const { isMobile } = useSidebar();
 
   return (
     <header className='w-full h-fit py-2 px-4 border-b flex justify-between items-center'>
-      <p className='font-bold text-2xl text-primary'>{title}</p>
+      {isMobile ? (
+        <SidebarTrigger className='w-auto text-primary font-semibold'>
+          <Menu size={32} />
+        </SidebarTrigger>
+      ) : (
+        <h1 className='text-2xl font-bold text-primary'>Dashboard</h1>
+      )}
       <div className='flex items-center gap-4'>
-        <Bell />
+        <div className='relative'>
+          <div className='absolute text-sm flex items-center justify-center h-5 w-5 text-primary-foreground rounded-full bg-destructive bottom-[65%] right-[60%]'>
+            8
+          </div>
+          <Bell />
+        </div>
         <div className='flex items-center gap-3'>
           <div className='flex flex-col'>
             <p className='text-[1.4rem] font-bold'>

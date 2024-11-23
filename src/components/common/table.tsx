@@ -28,7 +28,7 @@ function TableDemo<T>({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((item) => (
+        {data.map((item, index) => (
           <TableRow
             className={clsx({
               [rowStyles || '']: rowStyles,
@@ -42,7 +42,7 @@ function TableDemo<T>({
                 })}
                 key={column.header}
               >
-                {column.renderCell(item)}
+                {column.renderCell(item, index)}
               </TableCell>
             ))}
           </TableRow>
