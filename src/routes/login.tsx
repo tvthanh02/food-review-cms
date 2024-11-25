@@ -77,7 +77,7 @@ function LoginPage() {
                   <Input
                     id='password'
                     type={showPassword ? 'text' : 'password'}
-                    placeholder='••••••••'
+                    placeholder='12345678'
                     {...register('password', {
                       required: {
                         value: true,
