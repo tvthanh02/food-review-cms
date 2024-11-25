@@ -35,7 +35,7 @@ const ReportFilter = () => {
     });
 
     navigate({
-      search: (preSearch) => ({
+      search: (preSearch: SearchParamsReport) => ({
         ...preSearch,
         page: values.page,
         limit: values.limit,

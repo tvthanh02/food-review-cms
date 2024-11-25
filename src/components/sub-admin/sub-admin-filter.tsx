@@ -35,7 +35,7 @@ const SubAdminFilter = () => {
     });
 
     navigate({
-      search: (preSearch) => ({
+      search: (preSearch: SearchParamsSubadmin) => ({
         ...preSearch,
         page: values.page,
         limit: values.limit,
