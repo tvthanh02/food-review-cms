@@ -16,7 +16,7 @@ function TableDemo<T>({
   columnStyles,
 }: TableProps<T>) {
   return (
-    <Table>
+    <Table className='w-full overflow-y-auto'>
       {data?.length === 0 && <TableCaption>No records found</TableCaption>}
       <TableHeader>
         <TableRow className='bg-gray-100'>

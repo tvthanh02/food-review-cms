@@ -4,12 +4,12 @@ import { Separator } from '@/components/ui/separator';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
-  '/dashboard/_layout/(human)/sub-admins/$subAdminId'
+  '/dashboard/_layout/(human)/users/$userId'
 )({
-  component: SubAdminDetailPage,
+  component: UserDetailPage,
 });
 
-function SubAdminDetailPage() {
+function UserDetailPage() {
   return (
     <div className='w-full flex flex-col gap-5'>
       <section className='cus-container'>

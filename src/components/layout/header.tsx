@@ -1,9 +1,12 @@
 import useAuth from '@/data/auth/useAuth';
-import { Bell, Menu } from 'lucide-react';
+import { Bell, EllipsisVertical, Menu, Moon } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { CapitalizeFirstLetter } from '@/utils/helper';
 import { SidebarTrigger } from '../ui/sidebar';
 import useSidebar from '@/hooks/useSidebar';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Switch } from '../ui/switch';
+import { Separator } from '../ui/separator';
 
 const Header = () => {
   const { data: profile } = useAuth();
@@ -40,6 +43,26 @@ const Header = () => {
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type='button'
+                className=' flex items-center justify-center'
+              >
+                <EllipsisVertical size={20} />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent align='end' className='w-80 mt-3'>
+              <div className='w-full  text-sm flex items-center justify-between  rounded-sm hover:cursor-pointer p-2'>
+                <div className='flex h-full items-center gap-2 '>
+                  <Moon size={16} />
+                  <p>Dark mode</p>
+                </div>
+                <Switch />
+              </div>
+              <Separator />
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
     </header>

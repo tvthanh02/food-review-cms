@@ -39,7 +39,7 @@ export const items = [
     group: 'Human',
   },
   {
-    title: 'Reports',
+    title: 'Reports (13)',
     url: '/dashboard/reports',
     icon: ClipboardMinus,
     group: 'Reporting',

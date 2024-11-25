@@ -8,6 +8,7 @@ import {
 } from '../ui/dropdown-menu';
 import { Link } from '@tanstack/react-router';
 import { Badge } from '../ui/badge';
+import { format } from 'date-fns';
 
 export const reportColumns: TableColumn<ReportWithAction>[] = [
   {
@@ -101,11 +102,25 @@ export const reportColumns: TableColumn<ReportWithAction>[] = [
   },
   {
     header: 'Created At',
-    renderCell: (item) => <p>{item.created_at}</p>,
+    renderCell: (item) => (
+      <p>
+        {format(
+          new Date(item.created_at ?? '2024-11-22T08:22:45.427Z'),
+          'MMM dd, yyyy HH:mm'
+        )}
+      </p>
+    ),
   },
   {
     header: 'Update At',
-    renderCell: (item) => <p>{item.updated_at}</p>,
+    renderCell: (item) => (
+      <p>
+        {format(
+          new Date(item.updated_at ?? '2024-11-22T08:22:45.427Z'),
+          'MMM dd, yyyy HH:mm'
+        )}
+      </p>
+    ),
   },
   {
     header: 'Status',

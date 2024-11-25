@@ -8,6 +8,7 @@ import {
 } from '../ui/dropdown-menu';
 import { Link } from '@tanstack/react-router';
 import { Badge } from '../ui/badge';
+import { format } from 'date-fns';
 
 export const userColumns: TableColumn<User>[] = [
   {
@@ -25,10 +26,7 @@ export const userColumns: TableColumn<User>[] = [
               className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
               asChild
             >
-              <Link
-                to='/dashboard/sub-admins/$subAdminId'
-                params={{ subAdminId: item._id }}
-              >
+              <Link to='/dashboard/users/$userId' params={{ userId: item._id }}>
                 View Detail
               </Link>
             </DropdownMenuItem>
@@ -96,7 +94,14 @@ export const userColumns: TableColumn<User>[] = [
   },
   {
     header: 'Date Joined',
-    renderCell: (item) => <p>{item.created_at}</p>,
+    renderCell: (item) => (
+      <p>
+        {format(
+          new Date(item.created_at ?? '2024-11-22T08:22:45.427Z'),
+          'MMM dd, yyyy HH:mm'
+        )}
+      </p>
+    ),
   },
   {
     header: 'Status',

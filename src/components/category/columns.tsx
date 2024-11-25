@@ -7,6 +7,7 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { Link } from '@tanstack/react-router';
+import { format } from 'date-fns';
 import { Badge } from '../ui/badge';
 
 export const categoryColumns: TableColumn<CategoryWithAction>[] = [
@@ -66,13 +67,23 @@ export const categoryColumns: TableColumn<CategoryWithAction>[] = [
   {
     header: 'Created At',
     renderCell: (item) => (
-      <p>{item.created_at ?? '2024-11-22T08:22:45.427Z'}</p>
+      <p>
+        {format(
+          new Date(item.created_at ?? '2024-11-22T08:22:45.427Z'),
+          'MMM dd, yyyy HH:mm'
+        )}
+      </p>
     ),
   },
   {
     header: 'Update At',
     renderCell: (item) => (
-      <p>{item.updated_at ?? '2024-11-22T08:22:45.427Z'}</p>
+      <p>
+        {format(
+          new Date(item.updated_at ?? '2024-11-22T08:22:45.427Z'),
+          'MMM dd, yyyy HH:mm'
+        )}
+      </p>
     ),
   },
   {

@@ -8,11 +8,12 @@ import {
 } from '../ui/dropdown-menu';
 import { Link } from '@tanstack/react-router';
 import { Badge } from '../ui/badge';
+import { format } from 'date-fns';
 
 export const subAdminColumns: TableColumn<User>[] = [
   {
     header: '',
-    renderCell(item) {
+    renderCell() {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -25,20 +26,8 @@ export const subAdminColumns: TableColumn<User>[] = [
               className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
               asChild
             >
-              <Link
-                to='/dashboard/sub-admins/$subAdminId'
-                params={{ subAdminId: item._id }}
-              >
-                View Detail
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              className='px-3 gap-x-2 hover:cursor-pointer text-[1.3rem]'
-              asChild
-            >
               <Link to='/dashboard/users' search={{ page: 1, limit: 20 }}>
-                Suspense
+                Suspended
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
@@ -85,7 +74,14 @@ export const subAdminColumns: TableColumn<User>[] = [
   },
   {
     header: 'Date Joined',
-    renderCell: (item) => <p>{item.created_at}</p>,
+    renderCell: (item) => (
+      <p>
+        {format(
+          new Date(item.created_at ?? '2024-11-22T08:22:45.427Z'),
+          'MMM dd, yyyy HH:mm'
+        )}
+      </p>
+    ),
   },
   {
     header: 'Status',

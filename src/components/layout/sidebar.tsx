@@ -80,7 +80,7 @@ const SidebarCustom = () => {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>
-        <SidebarContent className='overflow-y-auto'>
+        <SidebarContent>
           <SidebarMenu>
             {groups.map((group) => (
               <SidebarGroup key={group}>
