@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "prebuild": "tsr generate",
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "npm run prebuild && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky"
@@ -53,6 +54,7 @@
     "@eslint/js": "^9.13.0",
     "@medusajs/ui-preset": "^2.0.4",
     "@tanstack/eslint-plugin-query": "^5.60.1",
+    "@tanstack/router-cli": "^1.81.9",
     "@tanstack/router-plugin": "^1.81.9",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
