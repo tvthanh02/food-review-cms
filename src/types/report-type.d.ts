@@ -25,3 +25,9 @@ interface CreateReportType {
   name: string;
   status?: string;
 }
+
+interface UpdateReportType {
+  _id: string;
+  name: string;
+  status?: string;
+}

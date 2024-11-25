@@ -17,7 +17,7 @@ const createReportType = async ({ name, status }: CreateReportType) => {
   }
 };
 
-const updateReportType = async ({ _id, name, status }: ReportType) => {
+const updateReportType = async ({ _id, name, status }: UpdateReportType) => {
   const dataUpdate = {
     name,
     status,
